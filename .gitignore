@@ -40,3 +40,6 @@ nosetests.xml
 
 # virtualenv
 venv/
+
+# Django
+db.sqlite3
