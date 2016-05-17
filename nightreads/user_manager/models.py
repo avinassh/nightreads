@@ -5,7 +5,7 @@ from nightreads.utils import TimeStampMixin
 from nightreads.posts.models import Tag
 
 
-class UserTags(TimeStampMixin):
+class UserTag(TimeStampMixin):
     user = models.OneToOneField(User)
     tags = models.ManyToManyField(Tag)
 
