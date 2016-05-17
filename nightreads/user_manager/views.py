@@ -1,11 +1,10 @@
-from django.contrib.auth.models import User
 from django.views.generic import View
 from django.http import JsonResponse
-from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 from .forms import SubscribeForm
+from . import user_service
 
 
 class SubscribeView(View):
@@ -20,8 +19,6 @@ class SubscribeView(View):
         if form.is_valid():
             email = form.cleaned_data['email']
             tags = form.cleaned_data['tags']
-            try:
-                User.objects.create_user(username=email)
-            except IntegrityError:
-                pass
+            user = user_service.get_user(email=email)
+            user_service.update_user_tags(user=user, tags=tags)
             return JsonResponse({'success': True})
