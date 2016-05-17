@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'nightreads',
-    'nightreads.posts'
+    'nightreads.posts',
+    'nightreads.user_manager'
 ]
 
 MIDDLEWARE_CLASSES = [
