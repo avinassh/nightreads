@@ -8,3 +8,6 @@ from nightreads.posts.models import Tag
 class UserTags(TimeStampMixin):
     user = models.OneToOneField(User)
     tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.user.username
