@@ -6,7 +6,9 @@ from .models import UserTag
 
 def update_user_tags(user, tags):
     tags_objs = Tag.objects.filter(name__in=tags)
-    user.usertag.tags.add(*tags_objs)
+    if tags_objs:
+        user.usertag.tags.clear()
+        user.usertag.tags.add(*tags_objs)
     user.save()
 
 
