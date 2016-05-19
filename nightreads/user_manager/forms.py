@@ -19,7 +19,7 @@ class UnsubscribeForm(forms.Form):
 
 
 class ConfirmEmailForm(forms.Form):
-    email = forms.EmailField()
+    user = forms.IntegerField()
     subscribe = forms.IntegerField()
     code = forms.CharField(max_length=80)
 
@@ -32,12 +32,12 @@ class ConfirmEmailForm(forms.Form):
         cleaned_data = super(ConfirmEmailForm, self).clean()
         if self.errors:
             return cleaned_data
-        email = cleaned_data['email']
+        user_id = cleaned_data['user_id']
         code = cleaned_data['code']
         for_subscription = cleaned_data['subscribe']
-        user = User.objects.filter(username=email).first()
+        user = User.objects.filter(id=user_id).first()
         if not user:
-            raise forms.ValidationError('Email not found')
+            raise forms.ValidationError('Invalid Link')
         self.cleaned_data['user'] = user
         try:
             user_service.validate_key(key=code, user=user,
