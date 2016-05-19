@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
+from django.core.signing import BadSignature, SignatureExpired
 from django import forms
+
+from . import user_service
 
 
 class SubscribeForm(forms.Form):
@@ -31,12 +34,16 @@ class ConfirmEmailForm(forms.Form):
             return cleaned_data
         email = cleaned_data['email']
         code = cleaned_data['code']
+        for_subscription = cleaned_data['subscribe']
         user = User.objects.filter(username=email).first()
         if not user:
             raise forms.ValidationError('Email not found')
         self.cleaned_data['user'] = user
-        if user.emailverification.is_key_expired():
-            raise forms.ValidationError('Link expired, please regenerate')
-        if not user.emailverification.key == code:
+        try:
+            user_service.validate_key(key=code, user=user,
+                                      for_subscription=for_subscription)
+        except BadSignature:
             raise forms.ValidationError('Invalid Link')
+        except SignatureExpired:
+            raise forms.ValidationError('Link expired, please regenerate')
         return cleaned_data
