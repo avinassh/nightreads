@@ -20,5 +20,8 @@ class SubscribeView(View):
             email = form.cleaned_data['email']
             tags = form.cleaned_data['tags']
             user = user_service.get_user(email=email)
-            user_service.update_user_tags(user=user, tags=tags)
-            return JsonResponse({'success': True})
+            is_updated = user_service.update_user_tags(user=user, tags=tags)
+            if is_updated:
+                key = user_service.generate_subscribe_key(user=user)
+                return JsonResponse({'success': key})
+            return JsonResponse({'success': False})
