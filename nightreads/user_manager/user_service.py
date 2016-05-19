@@ -25,18 +25,11 @@ def get_user(email):
     return User.objects.filter(username=email).first()
 
 
-def generate_subscribe_key(user):
+def generate_email_verification_key(user):
     subscribe_key = User.objects.make_random_password(length=80)
     EmailVerification.objects.update_or_create(
         user=user, defaults={'subscribe_key': subscribe_key})
     return subscribe_key
-
-
-def generate_unsubscribe_key(user):
-    unsubscribe_key = User.objects.make_random_password(length=80)
-    EmailVerification.objects.update_or_create(
-        user=user, defaults={'unsubscribe_key': unsubscribe_key})
-    return unsubscribe_key
 
 
 def update_subscription(user, status):
