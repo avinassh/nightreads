@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
-from django.conf import settings
 
 from nightreads.utils import TimeStampMixin
 from nightreads.posts.models import Tag
@@ -14,16 +12,3 @@ class Subscription(TimeStampMixin):
 
     def __str__(self):
         return self.user.username
-
-
-class EmailVerification(models.Model):
-    generated_on = models.DateTimeField(auto_now=True)
-    key = models.CharField(max_length=80)
-    user = models.OneToOneField(User)
-
-    def is_key_expired(self):
-        current_time = timezone.now()
-        delta = current_time - self.generated_on
-        if delta.days > settings.EMAIL_LINK_EXPIRY_DAYS:
-            return True
-        return False

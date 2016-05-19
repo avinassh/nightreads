@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.signing import TimestampSigner
 
 from nightreads.posts.models import Tag
-from .models import (Subscription, EmailVerification)
+from .models import Subscription
 
 
 def update_user_tags(user, tags):
