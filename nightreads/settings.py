@@ -128,5 +128,5 @@ STATIC_URL = '/static/'
 SPARKPOST_API_KEY = os.environ['SPARKPOST_API_KEY']
 EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
 
-# Email verification link expiry (in days)
-EMAIL_LINK_EXPIRY_DAYS = 3
+# Email verification link expiry (in seconds)
+EMAIL_LINK_EXPIRY_DAYS = 2 * 86400

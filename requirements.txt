@@ -1,3 +1,4 @@
 Django==1.9.6
 requests==2.10.0
 sparkpost==1.2.0
+itsdangerous==0.24
