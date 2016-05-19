@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.conf import settings
-from itsdangerous import TimestampSigner
+from django.core.signing import TimestampSigner
 
 from nightreads.posts.models import Tag
 from .models import (Subscription, EmailVerification)
@@ -29,15 +29,15 @@ def get_user(email):
 
 def generate_key(user, for_subscription=True):
     salt = 'subscription' if for_subscription else 'unsubscription'
-    signer = TimestampSigner(settings.SECRET_KEY, sep='', salt=salt)
-    return signer.sign(str(user.id)).decode('utf-8')
+    signer = TimestampSigner(settings.SECRET_KEY, salt=salt)
+    return signer.sign(str(user.id))
 
 
 def validate_key(key, user, for_subscription=True):
     salt = 'subscription' if for_subscription else 'unsubscription'
-    signer = TimestampSigner(settings.SECRET_KEY, sep='', salt=salt)
+    signer = TimestampSigner(settings.SECRET_KEY, salt=salt)
     value = signer.unsign(key, max_age=settings.EMAIL_LINK_EXPIRY_DAYS)
-    return str(user.id) == value.decode('utf-8')
+    return str(user.id) == value
 
 
 def update_subscription(user, status):

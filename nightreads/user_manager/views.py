@@ -22,7 +22,7 @@ class SubscribeView(View):
             user = user_service.get_or_create_user(email=email)
             is_updated = user_service.update_user_tags(user=user, tags=tags)
             if is_updated:
-                key = user_service.generate_email_verification_key(user=user)
+                key = user_service.generate_key(user=user)
                 return JsonResponse({'success': key})
             return JsonResponse({'success': False})
 
