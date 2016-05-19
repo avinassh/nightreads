@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 
 from nightreads.posts.models import Tag
-from .models import (Subscription, SubscriptionActivation,
-                     UnsubscriptionActivation)
+from .models import (Subscription, EmailVerification)
 
 
 def update_user_tags(user, tags):
@@ -28,14 +27,14 @@ def get_user(email):
 
 def generate_subscribe_key(user):
     subscribe_key = User.objects.make_random_password(length=80)
-    SubscriptionActivation.objects.update_or_create(
+    EmailVerification.objects.update_or_create(
         user=user, defaults={'subscribe_key': subscribe_key})
     return subscribe_key
 
 
 def generate_unsubscribe_key(user):
     unsubscribe_key = User.objects.make_random_password(length=80)
-    UnsubscriptionActivation.objects.update_or_create(
+    EmailVerification.objects.update_or_create(
         user=user, defaults={'unsubscribe_key': unsubscribe_key})
     return unsubscribe_key
 
@@ -43,3 +42,13 @@ def generate_unsubscribe_key(user):
 def update_subscription(user, status):
     user.subscription.is_subscribed = status
     user.save()
+
+
+def verify_subscription_code(user, code):
+    if user.subscription.is_subscribed:
+        return True
+
+
+def verify_unsubscription_code(user, code):
+    if not user.subscription.is_subscribed:
+        return True

@@ -16,8 +16,9 @@ class Subscription(TimeStampMixin):
         return self.user.username
 
 
-class EmailVerificationMixin(models.Model):
+class EmailVerification(models.Model):
     generated_on = models.DateTimeField(auto_now=True)
+    key = models.CharField(max_length=80)
     user = models.OneToOneField(User)
 
     def is_key_expired(self):
@@ -26,14 +27,3 @@ class EmailVerificationMixin(models.Model):
         if delta.days > settings.EMAIL_LINK_EXPIRY_DAYS:
             return True
         return False
-
-    class Meta:
-        abstract = True
-
-
-class SubscriptionActivation(EmailVerificationMixin):
-    subscribe_key = models.CharField(max_length=80)
-
-
-class UnsubscriptionActivation(EmailVerificationMixin):
-    unsubscribe_key = models.CharField(max_length=80)
