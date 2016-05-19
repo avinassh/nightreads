@@ -15,11 +15,15 @@ def update_user_tags(user, tags):
     return False
 
 
-def get_user(email):
+def get_or_create_user(email):
     user, created = User.objects.get_or_create(username=email)
     if created:
         Subscription.objects.create(user=user)
     return user
+
+
+def get_user(email):
+    return User.objects.filter(username=email).first()
 
 
 def generate_subscribe_key(user):
@@ -34,3 +38,8 @@ def generate_unsubscribe_key(user):
     UnsubscriptionActivation.objects.update_or_create(
         user=user, defaults={'unsubscribe_key': unsubscribe_key})
     return unsubscribe_key
+
+
+def update_subscription(user, status):
+    user.subscription.is_subscribed = status
+    user.save()
