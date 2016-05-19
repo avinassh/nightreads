@@ -5,10 +5,9 @@ class SubscribeForm(forms.Form):
     email = forms.EmailField()
     tags = forms.CharField()
 
-    def clean(self):
+    def clean_tags(self):
         tags = self.cleaned_data['tags'].split(',')
-        self.cleaned_data['tags'] = [t.strip().lower() for t in tags]
-        return self.cleaned_data
+        return [t.strip().lower() for t in tags]
 
 
 class UnsubscribeForm(forms.Form):
