@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-from .forms import SubscribeForm
+from .forms import SubscribeForm, UnsubscribeForm
 from . import user_service
 
 
@@ -19,9 +19,26 @@ class SubscribeView(View):
         if form.is_valid():
             email = form.cleaned_data['email']
             tags = form.cleaned_data['tags']
-            user = user_service.get_user(email=email)
+            user = user_service.get_or_create_user(email=email)
             is_updated = user_service.update_user_tags(user=user, tags=tags)
             if is_updated:
                 key = user_service.generate_subscribe_key(user=user)
                 return JsonResponse({'success': key})
             return JsonResponse({'success': False})
+
+
+class UnsubscribeView(View):
+    form_class = UnsubscribeForm
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UnsubscribeView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = user_service.get_user(email=email)
+            if not user:
+                return JsonResponse({'success': False})
+            return JsonResponse({'success': True})

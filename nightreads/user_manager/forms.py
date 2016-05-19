@@ -9,3 +9,7 @@ class SubscribeForm(forms.Form):
         tags = self.cleaned_data['tags'].split(',')
         self.cleaned_data['tags'] = [t.strip().lower() for t in tags]
         return self.cleaned_data
+
+
+class UnsubscribeForm(forms.Form):
+    email = forms.EmailField()
