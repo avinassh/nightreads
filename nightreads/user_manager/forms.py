@@ -32,7 +32,7 @@ class ConfirmEmailForm(forms.Form):
         cleaned_data = super(ConfirmEmailForm, self).clean()
         if self.errors:
             return cleaned_data
-        user_id = cleaned_data['user_id']
+        user_id = cleaned_data['user']
         code = cleaned_data['code']
         for_subscription = cleaned_data['subscribe']
         user = User.objects.filter(id=user_id).first()
