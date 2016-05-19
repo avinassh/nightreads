@@ -5,7 +5,7 @@ from nightreads.utils import TimeStampMixin
 from nightreads.posts.models import Tag
 
 
-class UserTag(TimeStampMixin):
+class Subscription(TimeStampMixin):
     is_subscribed = models.BooleanField(default=False)
     user = models.OneToOneField(User)
     tags = models.ManyToManyField(Tag)
