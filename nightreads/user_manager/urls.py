@@ -4,5 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'$', views.SubscribeView.as_view(), name='subscribe'),
+    url(r'unsubscribe/', views.UnsubscribeView.as_view(), name='unsubscribe'),
+    url(r'subscribe/', views.SubscribeView.as_view(), name='subscribe'),
 ]

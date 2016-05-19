@@ -20,6 +20,6 @@ from nightreads.user_manager import urls as user_manager_urls
 
 
 urlpatterns = [
-    url(r'^subscribe/', include(user_manager_urls, namespace='user')),
+    url(r'^user/', include(user_manager_urls, namespace='user')),
     url(r'^admin/', admin.site.urls),
 ]
