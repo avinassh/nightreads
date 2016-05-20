@@ -83,7 +83,8 @@ def send_confirmation_email(request, user, key, for_subscription=True):
     query_params = dict(
         user=user.id, code=key, subscribe=int(for_subscription))
     url = _update_url_query_param(url=site_url, query_params=query_params)
-    message, subject = _get_message_and_subject(url=url)
+    message, subject = _get_message_and_subject(
+        url=url, for_subscription=for_subscription)
     send_mail(
         subject=subject,
         message=message,
