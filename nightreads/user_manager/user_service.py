@@ -61,16 +61,6 @@ def update_subscription(user, status):
     user.save()
 
 
-def verify_subscription_code(user, code):
-    if user.subscription.is_subscribed:
-        return True
-
-
-def verify_unsubscription_code(user, code):
-    if not user.subscription.is_subscribed:
-        return True
-
-
 def _get_message_and_subject(url, for_subscription=True):
     key = 'subscribe' if for_subscription else 'unsubscribe'
     message_template = 'user_manager/{}.html'.format(key)
