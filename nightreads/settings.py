@@ -130,3 +130,6 @@ EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
 
 # Email verification link expiry (in seconds)
 EMAIL_LINK_EXPIRY_DAYS = 2 * 86400
+
+# From Email to be used in sending mails
+SENDER_EMAIL = 'nightreads@devup.in'

@@ -23,7 +23,7 @@ class SubscribeView(View):
             is_updated = user_service.update_user_tags(user=user, tags=tags)
             if is_updated:
                 key = user_service.generate_key(user=user)
-                user_service.send_subscription_conf_email(
+                user_service.send_confirmation_email(
                     request=request, user=user, key=key)
                 return JsonResponse({'success': key})
             return JsonResponse({'success': False})
