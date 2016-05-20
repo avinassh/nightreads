@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Nightreads
+      </h1>
+      <h2>A good read before a good night's sleep, everyday.</h2>
+      <div class="ui inverted segment">
+      <form class="ui inverted form" method="POST" action="{% url 'users:subscribe' %}">
+        {% csrf_token %}
+        <div class="field">
+          <label>email</label>
+          <input type="email" name="email" placeholder="Your Email">
+        </div>
+        <div class="field">
+          <label>tags</label>
+          <select multiple="" name="tags" class="ui dropdown">
+            <option value="">Select Your Interests</option>
+            {% for tag in tags %}
+            <option value="{{ tag.name }}">{{ tag.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button class="ui button" type="submit">Submit</button>
+      </form>
+      </div>
+    </div>
+  </div>
+  <div class="ui inverted vertical center aligned footer segment">
+    <div class="ui container">
+      <div class="ui inverted">
+        <div class="sixteen wide column">
+          <h4 class="ui inverted header">Footer Header</h4>
+          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.ui.dropdown').dropdown();
+</script>
+{% endblock %}
