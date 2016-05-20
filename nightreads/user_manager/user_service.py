@@ -1,9 +1,23 @@
+from urllib import parse
+
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.signing import TimestampSigner
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 
 from nightreads.posts.models import Tag
 from .models import Subscription
+
+
+def _update_url_query_param(url, query_params):
+    url_parts = parse.urlparse(url)
+    old_qs_args = dict(parse.parse_qsl(url_parts[4]))
+    old_qs_args.update(query_params)
+    new_qs = parse.urlencode(old_qs_args)
+    return parse.urlunparse(
+        list(url_parts[0:4]) + [new_qs] + list(url_parts[5:]))
 
 
 def update_user_tags(user, tags):
@@ -53,3 +67,18 @@ def verify_subscription_code(user, code):
 def verify_unsubscription_code(user, code):
     if not user.subscription.is_subscribed:
         return True
+
+
+def send_subscription_conf_email(request, user, key, for_subscription=True):
+    site_url = request.build_absolute_uri(reverse('users:confirm'))
+    query_params = dict(
+        user=user.id, code=key, subscribe=int(for_subscription))
+    new_url = _update_url_query_param(url=site_url, query_params=query_params)
+    message = render_to_string('user_manager/subscribe.html', {'url': new_url})
+    send_mail(
+        subject='Nightreads subscription confirmation email',
+        message=message,
+        html_message=message.replace('\n', '<br />'),
+        from_email='nightreads@devup.in',
+        recipient_list=[user.username],
+    )
