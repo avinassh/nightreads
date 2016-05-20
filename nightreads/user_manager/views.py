@@ -1,8 +1,10 @@
 from django.views.generic import View
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+from nightreads.posts.models import Tag
 from .forms import SubscribeForm, UnsubscribeForm, ConfirmEmailForm
 from . import user_service
 
@@ -10,9 +12,9 @@ from . import user_service
 class SubscribeView(View):
     form_class = SubscribeForm
 
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super(SubscribeView, self).dispatch(request, *args, **kwargs)
+    def get(self, request):
+        all_tags = Tag.objects.all()
+        return render(request, 'user_manager/index.html', {'tags': all_tags})
 
     def post(self, request):
         form = self.form_class(request.POST)
