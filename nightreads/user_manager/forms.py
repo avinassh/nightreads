@@ -2,16 +2,14 @@ from django.contrib.auth.models import User
 from django.core.signing import BadSignature, SignatureExpired
 from django import forms
 
+from nightreads.posts.models import Tag
 from . import user_service
 
 
 class SubscribeForm(forms.Form):
     email = forms.EmailField()
-    tags = forms.CharField()
-
-    def clean_tags(self):
-        tags = self.cleaned_data['tags'].split(',')
-        return [t.strip().lower() for t in tags]
+    tags = forms.MultipleChoiceField(choices=[(
+        t.name, t.name) for t in Tag.objects.all()])
 
 
 class UnsubscribeForm(forms.Form):
