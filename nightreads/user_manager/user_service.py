@@ -55,6 +55,8 @@ def validate_key(key, user, for_subscription=True):
 
 
 def update_subscription(user, status):
+    if user.subscription.is_subscribed == status:
+        return True
     user.subscription.is_subscribed = status
     user.save()
 
