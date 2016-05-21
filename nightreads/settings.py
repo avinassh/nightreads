@@ -136,3 +136,10 @@ EMAIL_LINK_EXPIRY_DAYS = 2 * 86400
 
 # From Email to be used in sending mails
 SENDER_EMAIL = 'nightreads@devup.in'
+
+# Summernote Settings
+SUMMERNOTE_CONFIG = {
+    'iframe': False,
+    'height': '480',
+    'disable_upload': True,
+}
