@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'nightreads',
     'nightreads.posts',
-    'nightreads.user_manager'
+    'nightreads.user_manager',
+    'nightreads.emails'
 ]
 
 MIDDLEWARE_CLASSES = [
