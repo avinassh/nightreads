@@ -22,4 +22,5 @@ from nightreads.user_manager import urls as user_manager_urls
 urlpatterns = [
     url(r'^users/', include(user_manager_urls, namespace='users')),
     url(r'^admin/', admin.site.urls),
+    url(r'^summernote/', include('django_summernote.urls')),
 ]
