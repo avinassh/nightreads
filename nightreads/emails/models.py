@@ -10,4 +10,7 @@ class Email(TimeStampMixin):
     targetted_users = models.PositiveIntegerField(null=True)
     is_sent = models.BooleanField(default=False)
 
-    post = models.ForeignKey(Post, null=True)
+    post = models.ForeignKey(Post, blank=True, null=True)
+
+    def __str__(self):
+        return "{} - {}".format(self.id, self.subject)
