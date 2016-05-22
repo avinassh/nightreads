@@ -1,19 +1,9 @@
 from django.contrib import admin
-from django import forms
 from django.conf.urls import url
-from django_summernote.widgets import SummernoteWidget
 
 from .models import Email
 from .views import SendEmailAdminView
-
-
-class EmailAdminForm(forms.ModelForm):
-    class Meta:
-        fields = '__all__'
-        model = Email
-        widgets = {
-            'message': SummernoteWidget()
-        }
+from .forms import EmailAdminForm
 
 
 class EmailAdmin(admin.ModelAdmin):
