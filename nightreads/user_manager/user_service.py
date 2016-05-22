@@ -63,7 +63,7 @@ def update_subscription(user, status):
 
 def _get_message_and_subject(url, for_subscription=True):
     key = 'subscribe' if for_subscription else 'unsubscribe'
-    message_template = 'user_manager/{}.html'.format(key)
+    message_template = 'user_manager/{}_email.html'.format(key)
     subject_template = 'user_manager/{}_subject.txt'.format(key)
     message = render_to_string(message_template, {'url': url})
     subject = render_to_string(subject_template)
