@@ -9,12 +9,17 @@ from .forms import SubscribeForm, UnsubscribeForm, ConfirmEmailForm
 from . import user_service
 
 
-class SubscribeView(View):
+class IndexView(View):
     form_class = SubscribeForm
 
     def get(self, request):
         all_tags = Tag.objects.all()
         return render(request, 'user_manager/index.html', {'tags': all_tags})
+
+
+class SubscribeView(View):
+
+    form_class = SubscribeForm
 
     def post(self, request):
         form = self.form_class(request.POST)
