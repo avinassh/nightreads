@@ -19,7 +19,7 @@
           <select multiple="" name="tags" class="ui dropdown">
             <option value="">Select Your Interests</option>
             {% for tag in tags %}
-            <option value="{{ tag.name }}">{{ tag.name }}</option>
+            <option value="{{ tag.id }}">{{ tag.name }}</option>
             {% endfor %}
           </select>
         </div>

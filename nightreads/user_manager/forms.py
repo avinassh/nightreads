@@ -8,8 +8,11 @@ from . import user_service
 
 class SubscribeForm(forms.Form):
     email = forms.EmailField()
-    tags = forms.MultipleChoiceField(choices=[(
-        t.name, t.name) for t in Tag.objects.all()])
+    tags = forms.ModelMultipleChoiceField(queryset=None)
+
+    def __init__(self, *args, **kwargs):
+        super(SubscribeForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].queryset = Tag.objects.all()
 
 
 class UnsubscribeForm(forms.Form):

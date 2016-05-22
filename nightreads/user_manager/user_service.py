@@ -7,7 +7,6 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 
-from nightreads.posts.models import Tag
 from .models import Subscription
 
 
@@ -21,10 +20,9 @@ def _update_url_query_param(url, query_params):
 
 
 def update_user_tags(user, tags):
-    tags_objs = Tag.objects.filter(name__in=tags)
-    if tags_objs:
+    if tags:
         user.subscription.tags.clear()
-        user.subscription.tags.add(*tags_objs)
+        user.subscription.tags.add(*tags)
         user.save()
         return True
     return False
