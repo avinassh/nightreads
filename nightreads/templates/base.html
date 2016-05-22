@@ -82,7 +82,36 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
 </head>
 <body>
+<div class="pusher">
 {% block body%}
 {% endblock %}
+  <div class="ui inverted vertical center aligned footer segment">
+    <div class="ui text container">
+      <div class="ui inverted">
+          <p><a href="{% url 'users:unsubscribe' %}">Unsubscribe</a> | <a href="http://slack.devup.in">Join Devup Slack</a> | <a href="//github.com/avinassh/nightreads">Built with &#x1F40D;</a> | <a href="https://twitter.com/devupin"><i class="twitter icon"></i></a></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+console.log(`                     @@@@@@ @
+                   @@@@     @@
+                  @@@@ =   =  @@
+                 @@@ @ _   _   @@
+                 @@@ @(0)|(0)  @@
+                @@@@   ~ | ~   @@
+                @@@ @  (o1o)    @@
+               @@@    #######    @
+               @@@   ##{+++}##   @@
+              @@@@@ ## ##### ## @@@@
+              @@@@@#############@@@@
+             @@@@@@@###########@@@@@@
+            @@@@@@@#############@@@@@
+            @@@@@@@### ## ### ###@@@@
+             @ @  @              @  @
+               @                    @`)
+console.log('gnu, if you see this, come home :)')
+</script>
+{% block javascript %}{% endblock %}
 </body>
 </html>
