@@ -44,3 +44,4 @@ venv/
 # Django
 db.sqlite3
 .envrc
+staticfiles
