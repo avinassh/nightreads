@@ -29,13 +29,20 @@
       </div>
     </div>
   </div>
-  <div class="ui inverted vertical center aligned footer segment">
-    <div class="ui container">
+  <div class="ui inverted vertical center aligned segment">
+    <div class="ui text container">
       <div class="ui inverted">
-        <div class="sixteen wide column">
-          <h4 class="ui inverted header">Footer Header</h4>
-          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-        </div>
+          <h2>What are Nightreads?</h2>
+          <p>Every night I will send an email with a link to an interesting read. The links will never have news items. There are <a href="http://lobste.rs">plenty</a> <a href="https://news.ycombinator.com">of</a> <a href="https://www.reddit.com/r/programming">places</a> where you can get latest tech news. Choose your interests in the above box and I will send the links accordingly. And select <code>all</code> to receive every email.</p>
+          <p>You can suggest me interesting links via <a href="https://twitter.com/devupin">Twitter</a>, <a href="http://scr.im/avii">email</a> or <a href="http://slack.devup.in">join</a> our <a href="https://dev-s.slack.com">Devup Slack Team</a>. I plan to build a webinterface to manage all this in future.</p>
+          <p>Nightreads was originally started by our member <a href="https://dev-s.slack.com/team/gnu">@gnu</a> in Devup Slack.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ui inverted vertical center aligned footer segment">
+    <div class="ui text container">
+      <div class="ui inverted">
+          <p><a href="{% url 'users:unsubscribe' %}">Unsubscribe</a> | <a href="http://slack.devup.in">Join Devup Slack</a> | <a href="//github.com/avinassh/nightreads">Built with &#x1F40D;</a> | <a href="https://twitter.com/devupin"><i class="twitter icon"></i></a></p>
       </div>
     </div>
   </div>
