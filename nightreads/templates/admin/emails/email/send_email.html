@@ -1,0 +1,32 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block title %}Send Email {{ email_obj.subject }}{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">Home</a>
+&rsaquo; <a href="{% url 'admin:app_list' 'emails' %}">Emails</a>
+&rsaquo; <a href="{% url 'admin:emails_email_changelist' %}">Emails</a>
+&rsaquo; {{ email_obj }}
+</div>
+{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    <div class="module aligned">
+      <h1><strong>Send Email?</strong></h1>
+      <p> The <code>&lt;Email {{ email_obj.id }}&gt;</code> will be sent to {{ email_obj.targetted_users }} Users.</p>
+    </div>
+    <form method="POST">
+    {% csrf_token %}
+    <div class="submit-row">
+      <input type="submit" value="Send" class="default">
+      <p class="deletelink-box"><a href="{% url 'admin:emails_email_change' email_obj.id %}" class="deletelink">Cancel</a></p>
+    </div>
+    </form>
+  </div>
+{% endblock %}
