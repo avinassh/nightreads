@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Nightreads
+      </h1>
+      <h2>A good read before a good night's sleep, everyday.</h2>
+      <div class="ui inverted segment">
+      <form class="ui inverted form" method="POST" action="{% url 'users:unsubscribe' %}">
+        {% csrf_token %}
+        <div class="field">
+          <label>email</label>
+          <input type="email" name="email" placeholder="Enter your email to unsusbcribe :(">
+        </div>
+        <button class="ui button" type="submit">Submit</button>
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
