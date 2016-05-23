@@ -8,23 +8,16 @@
       </h1>
       <h2>A good read before a good night's sleep, everyday.</h2>
       <div class="ui inverted segment">
-      <form class="ui inverted form" method="POST" action="{% url 'users:subscribe' %}">
-        {% csrf_token %}
-        <div class="field">
-          <label>email</label>
-          <input type="email" name="email" placeholder="Your Email">
-        </div>
-        <div class="field">
-          <label>tags</label>
-          <select multiple="" name="tags" class="ui dropdown">
-            <option value="">Select Your Interests</option>
-            {% for tag in tags %}
-            <option value="{{ tag.id }}">{{ tag.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <button class="ui button" type="submit">Submit</button>
-      </form>
+        <form class="ui inverted form" method="POST" action="{% url 'users:subscribe' %}">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="field">
+              {{ field.label_tag }}
+              {{ field }}
+            </div>
+          {% endfor %}
+          <button class="ui button" type="submit">Submit</button>
+        </form>
       </div>
     </div>
   </div>

@@ -4,17 +4,16 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-from nightreads.posts.models import Tag
 from .forms import SubscribeForm, UnsubscribeForm, ConfirmEmailForm
 from . import user_service
 
 
 class IndexView(View):
     form_class = SubscribeForm
+    template = 'user_manager/index.html'
 
     def get(self, request):
-        all_tags = Tag.objects.all()
-        return render(request, 'user_manager/index.html', {'tags': all_tags})
+        return render(request, self.template, {'form': self.form_class})
 
 
 class SubscribeView(View):
