@@ -1,8 +1,6 @@
 from django.views.generic import View
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 
 from .forms import SubscribeForm, UnsubscribeForm, ConfirmEmailForm
 from . import user_service
