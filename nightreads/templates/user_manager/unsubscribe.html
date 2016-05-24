@@ -7,11 +7,15 @@
         Nightreads
       </h1>
       <h2>A good read before a good night's sleep, everyday.</h2>
+    </div>
+  </div>
+  <div class="ui inverted vertical center aligned segment">
+    <div class="ui text container">
       <div class="ui inverted segment">
       <form class="ui inverted form" method="POST" action="{% url 'users:unsubscribe' %}">
         {% csrf_token %}
         <div class="field">
-          <label>email</label>
+          <label>Email</label>
           <input type="email" name="email" placeholder="Enter your email to unsusbcribe :(">
         </div>
         <button class="ui button" type="submit">Submit</button>
