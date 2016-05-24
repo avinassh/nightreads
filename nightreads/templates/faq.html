@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  {% include 'masthead.html' %}
+  <div class="ui inverted vertical center aligned segment">
+    <div class="ui text container">
+      <div class="ui inverted segment">
+        <h2 class="ui inverted header">FAQ</h2>
+      </div>
+    <div class="ui inverted segment">
+      <div class="ui inverted relaxed divided list">
+        <div class="item">
+          <div class="content">
+            <p>If I subscribe with a topic, say <code>python</code>, would I be receiving Python related topics everyday?</p>
+            <p>No, you will receive emails only on those days when Python related links are sent.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="content">
+            <p>How do I update my preferences?</p>
+            <p>Resubmit the form again with new topics.</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="content">
+            <p>Where do I provide feedback, suggestions or report bugs?</p>
+            <p>For feedback and suggestions, use this <a href="http://goo.gl/forms/lb8i7Le3H4MfNUzv2">Google Form</a>. For bug reports, use <a href="https://github.com/avinassh/nightreads/issues">Github Issues</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}

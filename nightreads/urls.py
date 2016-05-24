@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 from nightreads.user_manager import urls as user_manager_urls
 from nightreads.user_manager import views as user_views
@@ -24,5 +25,6 @@ urlpatterns = [
     url(r'^users/', include(user_manager_urls, namespace='users')),
     url(r'^admin/', admin.site.urls),
     url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^$', user_views.IndexView.as_view(), name='index')
+    url(r'^$', user_views.IndexView.as_view(), name='index'),
+    url(r'^faq/$', TemplateView.as_view(template_name='faq.html'), name='faq')
 ]
