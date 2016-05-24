@@ -12,8 +12,17 @@
           <input type="email" name="email" placeholder="Enter your email to unsusbcribe :(">
         </div>
         <button class="ui button" type="submit">Submit</button>
+        <div class="ui error message"></div>
       </form>
       </div>
     </div>
   </div>
+<script type="text/javascript">
+  $('.ui.form')
+  .form({
+    fields: {
+      email: 'email'
+      }
+  });
+</script>
 {% endblock %}
