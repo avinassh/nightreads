@@ -41,10 +41,6 @@ class UnsubscribeView(View):
     form_class = UnsubscribeForm
     template = 'user_manager/unsubscribe.html'
 
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super(UnsubscribeView, self).dispatch(request, *args, **kwargs)
-
     def get(self, request):
         return render(request, self.template)
 
