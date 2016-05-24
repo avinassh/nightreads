@@ -12,8 +12,6 @@ class SubscribeForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(SubscribeForm, self).__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs['required'] = True
-        self.fields['tags'].widget.attrs['required'] = True
         self.fields['tags'].queryset = Tag.objects.all()
         self.fields['tags'].widget.attrs['class'] = "ui dropdown"
         self.fields['tags'].empty_label = "Select Your Interests"

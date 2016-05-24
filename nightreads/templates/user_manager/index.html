@@ -14,6 +14,7 @@
             </div>
           {% endfor %}
           <button class="ui button" type="submit">Submit</button>
+          <div class="ui error message"></div>
         </form>
       </div>
     </div>
@@ -33,5 +34,28 @@
 {% block javascript %}
 <script type="text/javascript">
   $('.ui.dropdown').dropdown();
+  $('.ui.form')
+  .form({
+    fields: {
+      email: {
+        identifier: 'email',
+        rules: [
+          {
+            type   : 'email',
+            prompt : 'Please enter your email'
+          }
+        ]
+      },
+      tags: {
+        identifier: 'tags',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'You must select some tags'
+          }
+        ]
+      }
+    }
+  });
 </script>
 {% endblock %}
