@@ -1,4 +1,4 @@
-from django.views.generic import View
+from django.views.generic import View, FormView
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -34,25 +34,21 @@ class SubscribeView(View):
         return JsonResponse({'errors': form.errors})
 
 
-class UnsubscribeView(View):
-
+class UnsubscribeView(FormView):
     form_class = UnsubscribeForm
-    template = 'user_manager/unsubscribe.html'
+    template_name = 'user_manager/unsubscribe.html'
 
-    def get(self, request):
-        return render(request, self.template)
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        user = user_service.get_user(email=email)
+        if not user:
+            return JsonResponse({'error': 'User Not Found'})
+        key = user_service.generate_key(user=user, for_subscription=False)
+        user_service.send_confirmation_email(
+            request=self.request, user=user, key=key, for_subscription=False)
+        return JsonResponse({'status': 'Email sent'})
 
-    def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            user = user_service.get_user(email=email)
-            if not user:
-                return JsonResponse({'error': 'User Not Found'})
-            key = user_service.generate_key(user=user, for_subscription=False)
-            user_service.send_confirmation_email(
-                request=request, user=user, key=key, for_subscription=False)
-            return JsonResponse({'status': 'Email sent'})
+    def form_invalid(self, form):
         return JsonResponse({'errors': form.errors})
 
 
