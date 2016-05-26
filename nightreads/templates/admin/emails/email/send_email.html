@@ -23,7 +23,8 @@
     <form method="POST">
     {% csrf_token %}
     <div class="submit-row">
-      <input type="submit" value="Send" class="default">
+      <input type="submit" name="type" value="send" class="default">
+      <input type="submit" name="type" value="preview" class="default">
       <p class="deletelink-box"><a href="{% url 'admin:emails_email_change' email_obj.id %}" class="deletelink">Cancel</a></p>
     </div>
     </form>
