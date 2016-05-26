@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.signing import TimestampSigner
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 
+from nightreads.emails import email_service
 from .models import Subscription
 
 
@@ -75,10 +75,5 @@ def send_confirmation_email(request, user, key, for_subscription=True):
     url = _update_url_query_param(url=site_url, query_params=query_params)
     message, subject = _get_message_and_subject(
         url=url, for_subscription=for_subscription)
-    send_mail(
-        subject=subject,
-        message=message,
-        html_message=message.replace('\n', '<br />'),
-        from_email=settings.SENDER_EMAIL,
-        recipient_list=[user.username],
-    )
+    email_service.send_email(subject=subject, message=message,
+                             recipient_list=[user.username])
