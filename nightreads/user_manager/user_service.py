@@ -56,7 +56,7 @@ def update_subscription(user, status):
     if user.subscription.is_subscribed == status:
         return True
     user.subscription.is_subscribed = status
-    user.save()
+    user.subscription.save()
 
 
 def _get_message_and_subject(url, for_subscription=True):
