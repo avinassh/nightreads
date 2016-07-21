@@ -1,5 +1,6 @@
 {% extends "admin/change_form.html" %}
 {% block object-tools-items %}
     {{ block.super }}
+    <li><a class="historylink" href="{% url 'admin:update_target_count' original.pk %}">Update Target Count</a></li>
     <li><a class="historylink" href="{% url 'admin:send_email' original.pk %}">Send Email</a></li>
 {% endblock %}

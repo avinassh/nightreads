@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.conf.urls import url
 
 from .models import Email
-from .views import SendEmailAdminView
+from .views import SendEmailAdminView, UpdateTargetCountView
 from .forms import EmailAdminForm
 
 
@@ -26,6 +26,9 @@ class EmailAdmin(admin.ModelAdmin):
             url(r'^(?P<pk>\d+)/send_email/$',
                 self.admin_site.admin_view(SendEmailAdminView.as_view()),
                 name='send_email'),
+            url(r'^(?P<pk>\d+)/update_target_count/$',
+                self.admin_site.admin_view(UpdateTargetCountView.as_view()),
+                name='update_target_count'),
         ]
         return my_urls + urls
 
