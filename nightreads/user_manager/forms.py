@@ -8,13 +8,12 @@ from . import user_service
 
 class SubscribeForm(forms.Form):
     email = forms.EmailField()
-    tags = forms.ModelMultipleChoiceField(queryset=None)
 
-    def __init__(self, *args, **kwargs):
-        super(SubscribeForm, self).__init__(*args, **kwargs)
-        self.fields['tags'].queryset = Tag.objects.all()
-        self.fields['tags'].widget.attrs['class'] = "ui dropdown"
-        self.fields['tags'].empty_label = "Select Your Interests"
+    def clean(self):
+        cleaned_data = super(SubscribeForm, self).clean()
+        all_tag, _ = Tag.objects.get_or_create(name='all')
+        cleaned_data['tags'] = [all_tag, ]
+        return cleaned_data
 
 
 class UnsubscribeForm(forms.Form):
