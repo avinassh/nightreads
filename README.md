@@ -26,6 +26,8 @@ Nightreads is an email and newsletter management app.
 
 ### Production (on Heroku)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 1. Create an app on Heroku and set the same env variables as above and also `ON_HEROKU` to any string:
 
         heroku create app_name
