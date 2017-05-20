@@ -51,3 +51,6 @@ staticfiles
 
 # Heroku things
 heroku
+
+# Secrets
+nightreads/settings/secrets.py
