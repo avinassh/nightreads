@@ -45,3 +45,9 @@ venv/
 db.sqlite3
 .envrc
 staticfiles
+
+# IDE
+.idea/
+
+# Heroku things
+heroku
