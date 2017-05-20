@@ -48,7 +48,7 @@ class UpdateTargetCountView(View):
 
 
 def _get_subscriber_emails(email_obj, count_only=False):
-    queryset = Subscription.objects.filter(
+    queryset = Subscription.objects.filter(is_subscribed=True).filter(
         Q(tags__in=email_obj.tags.all()) | Q(tags__name='all'))
     if count_only:
         return queryset.count()
