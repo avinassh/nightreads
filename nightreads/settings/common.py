@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django_summernote',
 
     'nightreads',
-    'nightreads.posts',
     'nightreads.user_manager',
     'nightreads.emails'
 ]
