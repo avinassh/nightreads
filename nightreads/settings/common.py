@@ -126,17 +126,10 @@ STATICFILES_DIRS = (
 )
 
 # Sparkpost settings
-SPARKPOST_API_KEY = os.environ['SPARKPOST_API_KEY']
 EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
 
 # Email verification link expiry (in seconds)
 EMAIL_LINK_EXPIRY_DAYS = 2 * 86400
-
-# From Email to be used in sending mails
-SENDER_EMAIL = 'nightreads@devup.in'
-
-# List of email recipients who will receive preview email
-PREVIEW_RECEPIENTS = ('hi@avi.im', 'v@devup.in')
 
 # Summernote Settings
 SUMMERNOTE_CONFIG = {
