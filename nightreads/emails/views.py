@@ -41,3 +41,11 @@ class UpdateTargetCountView(View):
         email_obj.save()
         return redirect(reverse(
             'admin:emails_email_change', args=(email_obj.id,)))
+
+
+def _get_subscriber_emails(email_obj, count_only=False):
+    queryset = Subscription.objects.filter(
+        Q(tags__in=email_obj.tags.all()) | Q(tags__name='all'))
+    if count_only:
+        return queryset.count()
+    return set(queryset.values_list('user__username', flat=True))
