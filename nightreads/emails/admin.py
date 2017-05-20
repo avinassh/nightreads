@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.conf.urls import url
 
-from .models import Email
+from .models import Email, Tag
 from .views import SendEmailAdminView, UpdateTargetCountView
 from .forms import EmailAdminForm
 
@@ -33,3 +33,4 @@ class EmailAdmin(admin.ModelAdmin):
         return my_urls + urls
 
 admin.site.register(Email, EmailAdmin)
+admin.site.register(Tag)
