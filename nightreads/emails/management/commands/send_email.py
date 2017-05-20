@@ -10,6 +10,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         email_obj = Email.objects.filter(is_sent=False).first()
         if not email_obj:
+            self.stdout.write(
+                self.style.SUCCESS('No emails available to send'))
             return
         email_obj.recipients = get_subscriber_emails(email_obj=email_obj)
         send_email_obj(email_obj=email_obj)
