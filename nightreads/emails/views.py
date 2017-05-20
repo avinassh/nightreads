@@ -26,7 +26,7 @@ class SendEmailAdminView(View):
             send_email_obj(email_obj=email_obj, preview=True)
             m = 'Preview email has been sent!'
         else:
-            email_obj.recipients = _get_subscriber_emails(email_obj=email_obj)
+            email_obj.recipients = get_subscriber_emails(email_obj=email_obj)
             m = 'Email has been sent!'
             send_email_obj(email_obj=email_obj)
             email_obj.is_sent = True
@@ -40,14 +40,14 @@ class UpdateTargetCountView(View):
 
     def get(self, request, pk):
         email_obj = Email.objects.get(pk=pk)
-        email_obj.targetted_users = _get_subscriber_emails(
+        email_obj.targetted_users = get_subscriber_emails(
             email_obj=email_obj, count_only=True)
         email_obj.save()
         return redirect(reverse(
             'admin:emails_email_change', args=(email_obj.id,)))
 
 
-def _get_subscriber_emails(email_obj, count_only=False):
+def get_subscriber_emails(email_obj, count_only=False):
     queryset = Subscription.objects.filter(is_subscribed=True).filter(
         Q(tags__in=email_obj.tags.all()) | Q(tags__name='all'))
     if count_only:
