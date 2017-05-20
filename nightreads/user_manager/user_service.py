@@ -1,3 +1,4 @@
+import os
 from urllib import parse
 
 from django.contrib.auth.models import User
@@ -9,6 +10,11 @@ from django.core.urlresolvers import reverse
 from nightreads.emails import email_service
 from .models import Subscription
 
+
+SALTS = {
+    'subscription': os.getenv('SUBSCRIPTION_SALT'),
+    'unsubscription': os.getenv('UNSUBSCRIPTION_SALT')
+}
 
 def _update_url_query_param(url, query_params):
     url_parts = parse.urlparse(url)
@@ -40,13 +46,15 @@ def get_user(email):
 
 
 def generate_key(user, for_subscription=True):
-    salt = 'subscription' if for_subscription else 'unsubscription'
+    # not really a proper use of salts
+    # but meh
+    salt = _get_salt(for_subscription)
     signer = TimestampSigner(settings.SECRET_KEY, salt=salt)
     return signer.sign(str(user.id))
 
 
 def validate_key(key, user, for_subscription=True):
-    salt = 'subscription' if for_subscription else 'unsubscription'
+    salt = _get_salt(for_subscription)
     signer = TimestampSigner(settings.SECRET_KEY, salt=salt)
     value = signer.unsign(key, max_age=settings.EMAIL_LINK_EXPIRY_DAYS)
     return str(user.id) == value
@@ -77,3 +85,8 @@ def send_confirmation_email(request, user, key, for_subscription=True):
         url=url, for_subscription=for_subscription)
     email_service.send_email(subject=subject, message=message,
                              recipient_list=[user.username])
+
+
+def _get_salt(for_subscription):
+    return SALTS['subscription']if for_subscription else SALTS[
+        'unsubscription']
