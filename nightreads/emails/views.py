@@ -30,6 +30,7 @@ class SendEmailAdminView(View):
             m = 'Email has been sent!'
             send_email_obj(email_obj=email_obj)
             email_obj.is_sent = True
+            email_obj.targetted_users = len(email_obj.recipients)
             email_obj.save()
         messages.add_message(request, messages.INFO, m)
         return redirect(reverse(

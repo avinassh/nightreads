@@ -14,6 +14,7 @@ class Command(BaseCommand):
         email_obj.recipients = get_subscriber_emails(email_obj=email_obj)
         send_email_obj(email_obj=email_obj)
         email_obj.is_sent = True
+        email_obj.targetted_users = len(email_obj.recipients)
         email_obj.save()
         self.stdout.write(
             self.style.SUCCESS('Successfully sent email {}'.format(email_obj)))
