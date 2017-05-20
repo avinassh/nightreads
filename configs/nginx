@@ -1,0 +1,50 @@
+# Following is the config for nginx. Rename this file to
+# `nightreads` and place it in `/etc/nginx/sites-available`
+# and make sure symlink is created in `/etc/nginx/sites-enabled`
+
+# sudo ln -s /etc/nginx/sites-available/nightreads /etc/nginx/sites-enabled/
+
+# following config assumes that Nightreads will be served at `nightreads.devup.in`
+
+upstream django {
+    server unix:///tmp/uwsgi.sock;
+}
+
+# redirect all non HTTP requests to HTTPS
+server {
+    listen 80;
+    server_name nightreads.devup.in;
+    return 301 https://$host$request_uri;
+}
+
+# configuration of the HTTPS server
+server {
+    listen 443 ssl;
+
+    # the domain name it will serve for
+    server_name nightreads.devup.in; # substitute your machine's IP address or FQDN
+
+    # SSL Cert settings
+    ssl_certificate /etc/letsencrypt/live/nightreads.devup.in/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/nightreads.devup.in/privkey.pem;
+
+    charset utf-8;
+
+    # max upload size
+    client_max_body_size 10M;   # adjust to taste
+
+    location /static {
+        autoindex on;
+        alias /home/ubuntu/nightreads/nightreads/static/;
+    }
+
+    location /media {
+        autoindex on;
+        alias /home/ubuntu/nightreads/nightreads/media/;
+    }
+
+    location / {
+        uwsgi_pass  django;
+        include uwsgi_params; # the uwsgi_params file you installed
+    }
+}
