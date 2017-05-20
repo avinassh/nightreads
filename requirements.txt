@@ -2,7 +2,5 @@ Django==1.9.6
 requests==2.10.0
 sparkpost==1.2.0
 gunicorn==19.5.0
-dj-database-url==0.4.1
-whitenoise==3.1
 psycopg2==2.6.1
 django-summernote==0.8.5
