@@ -3,7 +3,7 @@ Run the cron job, for every two days at 10pm to send the emails:
 1. Add the cron job
 
     $ crontab -e
-    0 22 */2 * * DJANGO_SETTINGS_MODULE=nightreads.settings.production /home/ubuntu/nightreads/venv/bin/python3 manage.py send_email >> /home/ubuntu/nightreads/logs/cron_stdout.log 2>&1
+    0 22 */2 * * cd /home/ubuntu/nightreads && DJANGO_SETTINGS_MODULE=nightreads.settings.production ./venv/bin/python3 manage.py send_email >> logs/cron_stdout.log 2>&1
 
 2. Confirm it is added:
 
