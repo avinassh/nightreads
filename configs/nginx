@@ -35,7 +35,7 @@ server {
 
     location /static {
         autoindex on;
-        alias /home/ubuntu/nightreads/nightreads/static/;
+        alias /home/ubuntu/nightreads/nightreads/staticfiles/;
     }
 
     location /media {
