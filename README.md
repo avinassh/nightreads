@@ -24,20 +24,6 @@ Nightreads is an email and newsletter management app.
 
         python manage.py migrate
 
-### Production (on Heroku)
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-1. Create an app on Heroku and set the same env variables as above and also `ON_HEROKU` to any string:
-
-        heroku create app_name
-        heroku config:set SECRET_KEY='something very secret' SPARKPOST_API_KEY='sparkpost_key' ON_HEROKU='OHYEAH'
-
-2. Push to Heroku and run migration:
-
-        git push heroku master
-        heroku run python manage.py migrate --settings='nightreads.settings.heroku'
-
 ## License
 
 The mighty MIT license. Please check `LICENSE` for more details.
