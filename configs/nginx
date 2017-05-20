@@ -4,7 +4,7 @@
 
 # sudo ln -s /etc/nginx/sites-available/nightreads /etc/nginx/sites-enabled/
 
-# following config assumes that della will be served at `nightreads.devup.in`
+# following config assumes that Nightreads will be served at `nightreads.devup.in`
 
 upstream django {
     server unix:///tmp/uwsgi.sock;
