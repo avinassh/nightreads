@@ -16,6 +16,7 @@ SALTS = {
     'unsubscription': os.getenv('UNSUBSCRIPTION_SALT')
 }
 
+
 def _update_url_query_param(url, query_params):
     url_parts = parse.urlparse(url)
     old_qs_args = dict(parse.parse_qsl(url_parts[4]))
