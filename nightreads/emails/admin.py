@@ -11,7 +11,7 @@ class EmailAdmin(admin.ModelAdmin):
     readonly_fields = ('targetted_users', 'is_sent',)
     add_fieldsets = (
         (None, {
-            'fields': ('subject', 'message', 'post'),
+            'fields': ('subject', 'message'),
         }),
     )
 

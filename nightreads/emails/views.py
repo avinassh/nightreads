@@ -37,7 +37,7 @@ class UpdateTargetCountView(View):
     def get(self, request, pk):
         email_obj = Email.objects.get(pk=pk)
         email_obj.targetted_users = Subscription.objects.filter(
-            tags__in=email_obj.post.tags.all()).count()
+            tags__in=email_obj.tags.all()).count()
         email_obj.save()
         return redirect(reverse(
             'admin:emails_email_change', args=(email_obj.id,)))
