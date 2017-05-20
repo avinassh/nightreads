@@ -40,9 +40,12 @@ class UpdateTargetCountView(View):
 
     def get(self, request, pk):
         email_obj = Email.objects.get(pk=pk)
-        email_obj.targetted_users = get_subscriber_emails(
-            email_obj=email_obj, count_only=True)
-        email_obj.save()
+        # if the email is already sent, then no point in updating the
+        # target count
+        if not email_obj.is_sent:
+            email_obj.targetted_users = get_subscriber_emails(
+                email_obj=email_obj, count_only=True)
+            email_obj.save()
         return redirect(reverse(
             'admin:emails_email_change', args=(email_obj.id,)))
 
