@@ -7,6 +7,8 @@ from .forms import EmailAdminForm
 
 
 class EmailAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'is_sent']
+    list_filter = ['is_sent']
     form = EmailAdminForm
     readonly_fields = ('targetted_users', 'is_sent',)
     add_fieldsets = (
