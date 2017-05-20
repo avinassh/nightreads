@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from nightreads.utils import TimeStampMixin
-from nightreads.posts.models import Tag
+from nightreads.emails.models import Tag
 
 
 class Subscription(TimeStampMixin):

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.core.signing import BadSignature, SignatureExpired
 from django import forms
 
-from nightreads.posts.models import Tag
+from nightreads.emails.models import Tag
 from . import user_service
 
 
