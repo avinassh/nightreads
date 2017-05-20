@@ -2,4 +2,8 @@ from django.contrib import admin
 
 from .models import Subscription
 
-admin.site.register(Subscription)
+
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'is_subscribed']
+
+admin.site.register(Subscription, SubscriptionAdmin)
