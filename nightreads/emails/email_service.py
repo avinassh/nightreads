@@ -13,3 +13,10 @@ def send_email(subject, message, recipient_list=(), preview=None):
         from_email=settings.SENDER_EMAIL,
         recipient_list=recipient_list,
     )
+
+
+def send_email_obj(email_obj, preview=None):
+    if preview:
+        email_obj.recipients = settings.PREVIEW_RECEPIENTS
+    send_email(subject=email_obj.subject, message=email_obj.message,
+               recipient_list=email_obj.recipients, preview=preview)
